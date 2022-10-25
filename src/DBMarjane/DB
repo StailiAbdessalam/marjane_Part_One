@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS AdminGeneral (
+    agId serial primary key ,
+    agFullName varchar(255) not null ,
+    agLastName varchar(255) not null ,
+    agEmail varchar(255) unique not null ,
+    agPassword varchar(255) unique not null
+)
+CREATE TABLE IF NOT EXISTS CentreAdmin (
+      caId serial primary key ,
+      idcenter INT not null ,
+      caFullName varchar(255) not null ,
+      caLastName varchar(255) not null ,
+      caEmail varchar(255) unique not null ,
+      caPassword varchar(255) unique not null,
+      foreign key (idcenter) references center (cid)
+)
+CREATE TABLE IF NOT EXISTS Centre (
+      cId serial primary key ,
+      cName varchar(255) not null ,
+      cVille varchar(255) not null,
+      ccreatedat timestamp not null
+)
