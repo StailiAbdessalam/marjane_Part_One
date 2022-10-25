@@ -31,6 +31,18 @@ public class Manager {
     @Column(name = "mcreatedat", nullable = false)
     private Instant mcreatedat;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "midcategorie", nullable = false)
+    private Categorie midcategorie;
+
+    public Categorie getMidcategorie() {
+        return midcategorie;
+    }
+
+    public void setMidcategorie(Categorie midcategorie) {
+        this.midcategorie = midcategorie;
+    }
+
     public Manager(Centreadmin mcenteradmin, String mfullname, String memail, String mpassword, Instant mcreatedat) {
         this.mcenteradmin = mcenteradmin;
         this.mfullname = mfullname;
