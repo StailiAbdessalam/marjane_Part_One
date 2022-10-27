@@ -71,13 +71,22 @@ public class Menus {
         String hashedPassword = Password.hashPassword(password);
         return new Centreadmin(idcenter,fullName,email,hashedPassword);
     }
-    public static void deleteadmincenter(){
+    public static Boolean deleteadmincenter(){
         printScan.println("------------------- Create Admin Center -------------------");
         printScan.println("are you sure you want delete these adminCenter");
         printScan.println("1. Yes");
         printScan.println("2. No");
-        String email = printScan.scan().nextLine();
+        int choix = printScan.scan().nextInt();
+        switch (choix){
+            case 1:
+                return true;
+            case 2:
+                return false;
+            default:
+                Sout.sout("red","choix invalid");
 
+
+        }
     }
 //
 //    public static MarketmanagerEntity createManager() {

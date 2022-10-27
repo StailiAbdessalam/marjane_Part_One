@@ -7,14 +7,12 @@ import java.util.List;
 
 
 public class AdminCenterDao extends AbstractHibernateDao<Centreadmin> {
-
     public AdminCenterDao() {
         tableName = "centreadmin";
         setClazz(Centreadmin.class);
     }
 
-    //
-    public boolean validateSuperAdminLogin(Object[] login){
+    public boolean validateadminGeneralLogin(Object[] login){
         String email = (String) login[0];
         String password = (String) login[1];
         return jpaService.runInTransaction(entityManager -> {
@@ -25,32 +23,32 @@ public class AdminCenterDao extends AbstractHibernateDao<Centreadmin> {
         });
     }
     // find all superAdmins
-    public List getAllSuperAdmins() {
+    public List getAlladminGenerals() {
         return findAll();
     }
 
     // find one superAdmin by id
-    public Centreadmin getSuperAdminById(long id) {
+    public Centreadmin getadminGeneralById(long id) {
         return findOne(id);
     }
-
     // find one superAdmin by email
-    public Centreadmin getSuperAdminByEmail(String email) {
+    public Centreadmin getadminGeneralByEmail(String email) {
         return jpaService.runInTransaction(entityManager -> {
             return entityManager.createQuery("select s from Centreadmin s WHERE s.caemail = :email", Centreadmin.class)
                     .setParameter("email", email)
                     .getSingleResult();
         });
     }
-
+    public void addadminCenter(Centreadmin centreadmin){
+        create(centreadmin);
+    }
     // delete superAdmin
-    public void deleteSuperAdmin(Centreadmin superAdmin) {
-        delete(superAdmin);
+    public void deleteadminGeneral(Centreadmin centerAdmin) {
+        delete(centerAdmin);
     }
     // delete superAdmin by id
-    public void deleteSuperAdminById(long id) {
+    public void deleteadminGeneralById(long id) {
         deleteById(id);
     }
-
 
 }

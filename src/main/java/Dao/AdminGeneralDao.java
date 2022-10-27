@@ -2,10 +2,12 @@ package Dao;
 
 
 import Models.Admingeneral;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
-import static Utuls.password.checkPassword;
+import static Utuls.Password.checkPassword;
+import static Utuls.Password.hashPassword;
 import static helpers.Sout.sout;
 public class AdminGeneralDao extends AbstractHibernateDao<Admingeneral> {
     public AdminGeneralDao() {
@@ -24,11 +26,17 @@ public class AdminGeneralDao extends AbstractHibernateDao<Admingeneral> {
 
     // find one admin by email
     public Admingeneral getAdminByEmail(String email) {
+
         return jpaService.runInTransaction(entityManager -> {
-            return entityManager.createQuery("select a from Admingeneral a WHERE a.agemail = :email", Admingeneral.class)
-                    .setParameter("email", email)
-                    .getSingleResult();
+            try{
+                return entityManager.createQuery("select a from Admingeneral a WHERE a.agemail = :email", Admingeneral.class)
+                        .setParameter("email", email)
+                        .getSingleResult();
+            } catch (NoResultException nre){
+                return null;
+            }
         });
+
     }
 
     // find one admin by email and password
@@ -36,23 +44,17 @@ public class AdminGeneralDao extends AbstractHibernateDao<Admingeneral> {
         String email = (String) login[0];
         String password = (String) login[1];
         Admingeneral admin = getAdminByEmail(email);
-        if (admin != null){
-            sout("green","email valid");
-        }else {
-            sout("red","wrong email");
-        }
+
         assert admin != null;
-        if (checkPassword(password, admin.getAgpassword())){
-            sout("green","connected with success");
-            return true;
+        if(admin != null) {
+            if (checkPassword(password, admin.getAgpassword())) {
+                return true;
+            } else {
+                return false;
+            }
         }else {
-            sout("red","wrong password");
             return false;
         }
-    }
-    // create admin
-    public void createAdmin(Admingeneral admin) {
-        create(admin);
     }
 
     // update admin
@@ -69,6 +71,15 @@ public class AdminGeneralDao extends AbstractHibernateDao<Admingeneral> {
     public void deleteAdminById(long id) {
         deleteById(id);
     }
+
+//    public static void main(String[] args) {
+//        AdminGeneralDao superAdminDao = new AdminGeneralDao();
+//        Admingeneral superAdminEntity = new Admingeneral();
+//        superAdminEntity.setAgemail("sa@admin.com");
+//        superAdminEntity.setAgpassword(hashPassword("admin"));
+//        superAdminEntity.setAgfullname("abdessalam staili");
+//        superAdminDao.create(superAdminEntity);
+//    }
 }
 
 

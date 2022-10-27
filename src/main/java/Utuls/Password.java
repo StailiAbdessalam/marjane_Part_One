@@ -2,13 +2,14 @@ package Utuls;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-public class password {
+public class Password {
 
     /**
-     * hash password using bcrypt algorithm
-     * @param password String
+     *
+     * @param password
+     * @return
      */
-    protected static String hashPassword(String password) {
+    public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
     /**

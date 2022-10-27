@@ -1,18 +1,16 @@
 package Utuls;
 
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-
 import java.util.function.Function;
 
 public class JpaService {
     private static JpaService instance;
     private final EntityManagerFactory entityManagerFactory;
 
-    private JpaService() {
+    public JpaService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("marjanTest");
     }
 

@@ -16,9 +16,8 @@ public class Centreadmin implements Serializable {
     @Column(name = "caid", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idcenter", nullable = false)
-    private Center idcenter;
+    private int idcenter;
 
     @Column(name = "cafullname", nullable = false)
     private String cafullname;
@@ -29,7 +28,7 @@ public class Centreadmin implements Serializable {
     @Column(name = "capassword", nullable = false)
     private String capassword;
 
-    public Centreadmin(Center idcenter, String cafullname, String caemail, String capassword) {
+    public Centreadmin(int idcenter, String cafullname, String caemail, String capassword) {
         this.idcenter = idcenter;
         this.cafullname = cafullname;
         this.caemail = caemail;
