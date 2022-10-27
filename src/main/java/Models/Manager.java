@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
 @Table(name = "manager")
 @NoArgsConstructor @Data
-public class Manager {
+public class Manager implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mid", nullable = false)
