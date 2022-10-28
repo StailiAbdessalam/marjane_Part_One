@@ -9,7 +9,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "promotion")
-@Data @NoArgsConstructor
+@NoArgsConstructor
 public class Promotion implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,4 +40,6 @@ public class Promotion implements Serializable{
         this.pStatus = pStatus;
         this.pCreatedat = pCreatedat;
     }
+
+
 }

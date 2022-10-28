@@ -8,14 +8,19 @@ public class Globalmain {
             int choix = Menus.MenuGlobal();
             switch (choix){
                 case 1:
-                     int returne = WorkFlowAdmin.FlowAdmin();
-                     if(returne==0){
+                     int returnAdmin = WorkFlowAdmin.FlowAdmin();
+                     if(returnAdmin==0){
                          continue;
                      }else {
                          break;
                      }
                 case 2:
-                    break;
+                    int returneCenterAdmin = WorkFlowCenterAdmin.FlowAdminCenter();
+                    if(returneCenterAdmin==0){
+                        continue;
+                    }else {
+                        break;
+                    }
                 case 3:
                     break;
                 case 4:

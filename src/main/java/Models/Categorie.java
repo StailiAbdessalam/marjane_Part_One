@@ -26,4 +26,6 @@ public class Categorie implements Serializable {
         this.tname = tname;
         this.tcreatedat = tcreatedat;
     }
+
+
 }

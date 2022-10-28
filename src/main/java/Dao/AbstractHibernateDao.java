@@ -5,7 +5,6 @@ import Utuls.JpaService;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * Class to manage CRUD methods by taking Entity class using generic types
  * @param <T>
@@ -46,6 +45,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 
     public void delete(T entity) {
         jpaService.runInTransaction(entityManager -> {
+            entityManager.detach(entity);
             entityManager.remove(entity);
             return null;
         });

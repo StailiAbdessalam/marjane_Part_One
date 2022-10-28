@@ -1,6 +1,7 @@
 package Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,6 @@ public class Manager implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mid", nullable = false)
     private Integer id;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "mcenteradmin", nullable = false)
     private Centreadmin mcenteradmin;
@@ -36,19 +36,13 @@ public class Manager implements Serializable{
     @JoinColumn(name = "midcategorie", nullable = false)
     private Categorie midcategorie;
 
-    public Categorie getMidcategorie() {
-        return midcategorie;
-    }
 
-    public void setMidcategorie(Categorie midcategorie) {
-        this.midcategorie = midcategorie;
-    }
-
-    public Manager(Centreadmin mcenteradmin, String mfullname, String memail, String mpassword, Instant mcreatedat) {
+    public Manager(Centreadmin mcenteradmin, String mfullname, String memail, String mpassword, Instant mcreatedat, Categorie midcategorie) {
         this.mcenteradmin = mcenteradmin;
         this.mfullname = mfullname;
         this.memail = memail;
         this.mpassword = mpassword;
         this.mcreatedat = mcreatedat;
+        this.midcategorie = midcategorie;
     }
 }
